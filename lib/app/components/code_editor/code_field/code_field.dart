@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:print_script/app/app_controller.dart';
 
 import '../window_header/window_header.dart';
 import '../code_theme/code_theme.dart';
@@ -269,6 +270,7 @@ class _CodeFieldState extends State<CodeField> {
         child: Column(
 
           children: [
+            if(Controller.showWindowheader.value)
             WindowHeader(),
             Padding(
               padding: const EdgeInsets.only(left: 8),
