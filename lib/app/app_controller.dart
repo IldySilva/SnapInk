@@ -20,10 +20,10 @@ class Controller extends ChangeNotifier {
   static String code = defaultCode;
   static var selectedFont = ValueNotifier(EditorFont.sourceCodePro);
   static var selectedLanguage = ValueNotifier(LanguageTypes.javascript);
-  static var selectedTheme = ValueNotifier(ThemeType.darcula);
+  static var selectedTheme = ValueNotifier(ThemeType.irBlack);
 
   static ValueNotifier<GradientPalette> backgroundColor =
-      ValueNotifier<GradientPalette>(GradientPalette.OceanBreeze);
+      ValueNotifier<GradientPalette>(GradientPalette.PurpleHaze);
   static ValueNotifier<double> padding = ValueNotifier(60);
   static ValueNotifier<double> opactity = ValueNotifier(0.8);
   static ValueNotifier<bool> showLines = ValueNotifier(true);
