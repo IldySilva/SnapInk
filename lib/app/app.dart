@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadApp.material(
-      title: 'SnapInk',
+      title: 'SnapInk - Take beautiful snaps for sharing',
       theme: ShadThemeData(
         brightness: Brightness.dark,
         colorScheme: const ShadSlateColorScheme.light(),
