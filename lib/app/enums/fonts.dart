@@ -13,7 +13,6 @@ enum EditorFont {
   overpassMono,
   ibmPlexMono,
   redHatMono,
-  monofett,
   lekton,
   novaMono,
   syneMono,
@@ -52,8 +51,6 @@ extension CodingFontExtension on EditorFont {
       case EditorFont.redHatMono:
         return GoogleFonts.redHatMono(fontSize: fontSize);
 
-      case EditorFont.monofett:
-        return GoogleFonts.monofett(fontSize: fontSize);
 
       case EditorFont.lekton:
         return GoogleFonts.lekton(fontSize: fontSize);
@@ -99,8 +96,6 @@ extension CodingFontExtension on EditorFont {
         return "IBM Plex Mono";
       case EditorFont.redHatMono:
         return "Red Hat Mono";
-      case EditorFont.monofett:
-        return "Monofett";
 
       case EditorFont.lekton:
         return "Lekton";

@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   GlobalKey mainContainerKey = GlobalKey();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +22,10 @@ class _HomePageState extends State<HomePage> {
         return Flex(
           direction: Axis.horizontal,
           children: [
-            Flexible(flex: 2, child: AppToolBar()),
+            SizedBox(
+              width: 320,
+              child: AppToolBar(),
+            ),
             Expanded(
               flex: 6,
               child: Container(
@@ -33,16 +35,15 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
                     Expanded(
-                      child: Container(child: Center(
+                        child: Container(
+                      child: Center(
                         child: SingleChildScrollView(
-
                             child: CodeEditor(
-                              key: mainContainerKey,
-                            )),
-                      ),)
-                    ),
+                          key: mainContainerKey,
+                        )),
+                      ),
+                    )),
                     Container(
                       padding: EdgeInsets.all(16),
                       child: Row(

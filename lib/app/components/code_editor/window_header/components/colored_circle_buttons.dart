@@ -9,13 +9,16 @@ class ColoredCircleButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildCircle(redColor),
-        buildCircle(yellowColor),
-        buildCircle(greenColor),
-      ],
+    return FittedBox(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildCircle(redColor),
+          buildCircle(yellowColor),
+          buildCircle(greenColor),
+        ],
+      ),
     );
   }
 

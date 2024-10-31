@@ -29,10 +29,16 @@ class Controller extends ChangeNotifier {
   static ValueNotifier<bool> showLines = ValueNotifier(true);
   static ValueNotifier<double> borderRadius = ValueNotifier(20);
   static ValueNotifier<bool> exporting = ValueNotifier(false);
+  static ValueNotifier<bool> showWindowheader = ValueNotifier(true);
 
   static var codeController = CodeController(
       text: Controller.code,
       language: Controller.selectedLanguage.value.languageValue);
+
+  set setShowWindowHeader(bool value) {
+    showWindowheader.value = value;
+    notifyListeners();
+  }
 
   set setFont(EditorFont font) {
     selectedFont.value = font;
