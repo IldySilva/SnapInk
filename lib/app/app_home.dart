@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:print_script/app/utils/file_name_generator.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'components/wrapped_code_editor.dart';
 import 'components/sidebar.dart';
+import 'app_mobile.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -18,7 +20,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Builder(builder: (context) {
+      body: ResponsiveBuilder(builder: (context,sizingInformation) {
+
+        if(sizingInformation.isMobile){
+          return MobileApp();
+        }
         return Flex(
           direction: Axis.horizontal,
           children: [
