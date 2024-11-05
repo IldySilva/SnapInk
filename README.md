@@ -1,5 +1,6 @@
 
 # SnapInk – Turn Your Code into Stunning Visuals
+![image](https://github.com/user-attachments/assets/d2a2175a-771f-43e1-a06e-44a1edfa4b11)
 
 ### ✨ **What is SnapInk?**
 
