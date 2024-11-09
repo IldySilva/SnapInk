@@ -105,6 +105,12 @@ class CodeController extends TextEditingController {
     }
   }
 
+  void setCode(String text){
+    _code = _createCode(text);
+    fullText = text;
+    notifyListeners();
+  }
+
   void _scheduleAnalysis() {
     _debounce?.cancel();
 
