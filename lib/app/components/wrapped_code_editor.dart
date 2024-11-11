@@ -68,12 +68,8 @@ class _CodeEditorState extends State<CodeEditor> {
                                           showErrors: false,
                                           showLineNumbers:
                                               Controller.showLines.value),
-                                      controller: CodeController(
-                                          text: Controller.code,
-                                          language: Controller
-                                              .selectedLanguage
-                                              .value
-                                              .languageValue)),
+                                      controller: Controller.codeController,
+                                  ),
                                 ));
                           },
                           valueListenable: Controller.selectedTheme,
