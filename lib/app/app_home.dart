@@ -1,5 +1,5 @@
 import 'package:desktop_drop/desktop_drop.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:print_script/app/app_controller.dart';
@@ -57,26 +57,23 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        height: 90,
+                        padding: EdgeInsets.all(16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Start typing or "),
-                            ShadButton.link(child: Text("Pick/drop a file onto editor",style: TextStyle(decoration: TextDecoration.underline),),padding: EdgeInsets.zero,onPressed: () async {
-
-                              FilePickerResult? result = await FilePicker.platform.pickFiles(
-                                //TODO: add allowed extensions
-                                //type: FileType.custom,
-                                //allowedExtensions: ['txt', 'dart','java',..other language extensions],
-                              );
-                              if (result != null) {
-                                final code = await result.xFiles.first.readAsString();
-                                Controller.codeController.setCode(code);
-                              }
-                            },)
-
-                          ],),
+                            RichText(text: TextSpan(children: [
+                              TextSpan(text: "Start typing or ",),
+                              TextSpan(text: "Pick/drop a file onto editor",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = Controller().importFile,
+                              ),
+                            ]))
+                          ],
+                        ),
                       ),
                       Expanded(
                           child: Container(
