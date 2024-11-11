@@ -44,24 +44,7 @@ class AppToolBar extends StatelessWidget {
                   ],
                 ),
               ),
-              ShadButton(
-                width: double.infinity,
-                icon: Icon(Icons.file_open_outlined,size: 20,),
-                child: Text(
-                  "Import file",
-                ),
-                onPressed: () async {
-                  FilePickerResult? result = await FilePicker.platform.pickFiles(
-                    //TODO: add allowed extensions
-                    //type: FileType.custom,
-                    //allowedExtensions: ['txt', 'dart','java'],
-                  );
-                  if (result != null) {
-                    final code = await result.xFiles.first.readAsString();
-                    Controller.codeController.setCode(code);
-                  }
-                },
-              ),
+
               Flex(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 direction: Axis.horizontal,

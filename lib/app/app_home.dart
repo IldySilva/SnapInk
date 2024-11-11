@@ -1,9 +1,11 @@
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:print_script/app/app_controller.dart';
 import 'package:print_script/app/utils/file_name_generator.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'components/wrapped_code_editor.dart';
 import 'components/sidebar.dart';
@@ -34,6 +36,9 @@ class _HomePageState extends State<HomePage> {
               width: 320,
               child: AppToolBar(),
             ),
+
+
+
             Expanded(
               flex: 6,
               child: DropTarget(
@@ -51,6 +56,28 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Container(
+                        height: 90,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Start typing or "),
+                            ShadButton.link(child: Text("Pick/drop a file onto editor",style: TextStyle(decoration: TextDecoration.underline),),padding: EdgeInsets.zero,onPressed: () async {
+
+                              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                //TODO: add allowed extensions
+                                //type: FileType.custom,
+                                //allowedExtensions: ['txt', 'dart','java',..other language extensions],
+                              );
+                              if (result != null) {
+                                final code = await result.xFiles.first.readAsString();
+                                Controller.codeController.setCode(code);
+                              }
+                            },)
+
+                          ],),
+                      ),
                       Expanded(
                           child: Container(
                         child: Center(
