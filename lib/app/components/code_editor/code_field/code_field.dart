@@ -229,6 +229,7 @@ class _CodeFieldState extends State<CodeField> {
     final defaultTextStyle = TextStyle(
       color: styles?[rootKey]?.color ?? DefaultStyles.textColor,
       fontSize: themeData.textTheme.titleMedium?.fontSize,
+      height: 1,
     );
 
     textStyle = defaultTextStyle.merge(widget.textStyle);
