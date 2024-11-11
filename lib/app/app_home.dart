@@ -5,6 +5,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:print_script/app/app_controller.dart';
 import 'package:print_script/app/utils/file_name_generator.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'components/wrapped_code_editor.dart';
 import 'components/sidebar.dart';
@@ -35,6 +36,9 @@ class _HomePageState extends State<HomePage> {
               width: 320,
               child: AppToolBar(),
             ),
+
+
+
             Expanded(
               flex: 6,
               child: DropTarget(
