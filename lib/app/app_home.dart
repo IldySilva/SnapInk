@@ -1,4 +1,5 @@
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:print_script/app/app_controller.dart';
@@ -51,6 +52,25 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RichText(text: TextSpan(children: [
+                              TextSpan(text: "Start typing or ",),
+                              TextSpan(text: "Pick/drop a file onto editor",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = Controller().importFile,
+                              ),
+                            ]))
+                          ],
+                        ),
+                      ),
                       Expanded(
                           child: Container(
                         child: Center(

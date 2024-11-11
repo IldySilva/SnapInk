@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:print_script/app/consts/const_default_gradients.dart';
@@ -81,6 +82,18 @@ class Controller extends ChangeNotifier {
 
   //TODO: Reset all the config values
   void reset() {
+  }
+
+  Future<void> importFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      //TODO: add allowed extensions
+      //type: FileType.custom,
+      //allowedExtensions: ['txt', 'dart','java'],
+    );
+    if (result != null) {
+      final code = await result.xFiles.first.readAsString();
+      Controller.codeController.setCode(code);
+    }
   }
 
 }

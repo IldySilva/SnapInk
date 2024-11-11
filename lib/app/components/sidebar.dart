@@ -1,7 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:print_script/app/app_controller.dart';
 import 'package:print_script/app/enums/language/enum_languages.dart';
@@ -10,9 +6,6 @@ import 'package:print_script/app/widget_to_image_controller.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import '../consts/const_default_gradients.dart';
 import '../enums/fonts.dart';
-import 'dart:ui' as ui;
-
-import 'code_editor/code_field/code_controller.dart';
 
 class AppToolBar extends StatelessWidget {
   AppToolBar({super.key});
@@ -43,24 +36,6 @@ class AppToolBar extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              ShadButton(
-                width: double.infinity,
-                icon: Icon(Icons.file_open_outlined,size: 20,),
-                child: Text(
-                  "Import file",
-                ),
-                onPressed: () async {
-                  FilePickerResult? result = await FilePicker.platform.pickFiles(
-                    //TODO: add allowed extensions
-                    //type: FileType.custom,
-                    //allowedExtensions: ['txt', 'dart','java'],
-                  );
-                  if (result != null) {
-                    final code = await result.xFiles.first.readAsString();
-                    Controller.codeController.setCode(code);
-                  }
-                },
               ),
               Flex(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
