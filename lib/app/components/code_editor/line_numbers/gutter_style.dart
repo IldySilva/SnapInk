@@ -26,6 +26,9 @@ class GutterStyle {
   /// Central horizontal margin between the numbers and the code.
   final double margin;
 
+  /// Height of the lines
+  final double? lineHeight;
+
   /// Whether to show line numbers column.
   final bool showLineNumbers;
 
@@ -45,6 +48,7 @@ class GutterStyle {
     this.showFoldingHandles = true,
     this.showLineNumbers = true,
     this.width = 80.0,
+    this.lineHeight = 1.35,
     this.background,
     this.errorPopupTextStyle,
     this.textStyle,
@@ -63,6 +67,8 @@ class GutterStyle {
   GutterStyle copyWith({
     TextStyle? errorPopupTextStyle,
     TextStyle? textStyle,
+    double? lineHeight,
+    double? margin,
   }) =>
       GutterStyle(
         width: width,
@@ -70,10 +76,11 @@ class GutterStyle {
         textStyle: textStyle ?? this.textStyle,
         errorPopupTextStyle: errorPopupTextStyle,
         background: background,
-        margin: margin,
+        margin: margin ?? this.margin,
         showErrors: showErrors,
         showFoldingHandles: showFoldingHandles,
         showLineNumbers: showLineNumbers,
+        lineHeight: lineHeight ?? this.lineHeight,
       );
 }
 

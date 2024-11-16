@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:print_script/app/app_controller.dart';
 
@@ -229,7 +227,7 @@ class _CodeFieldState extends State<CodeField> {
     final defaultTextStyle = TextStyle(
       color: styles?[rootKey]?.color ?? DefaultStyles.textColor,
       fontSize: themeData.textTheme.titleMedium?.fontSize,
-      height: 1,
+      height: DefaultStyles.lineHeight,
     );
 
     textStyle = defaultTextStyle.merge(widget.textStyle);
@@ -269,12 +267,14 @@ class _CodeFieldState extends State<CodeField> {
       key: _codeFieldKey,
       child: IntrinsicWidth(
         child: Column(
-
           children: [
-            if(Controller.showWindowheader.value)
-            WindowHeader(),
+            if (Controller.showWindowheader.value) ...[
+              WindowHeader(),
+            ],
             Padding(
-              padding: const EdgeInsets.only(left: 8),
+              padding: EdgeInsets.only(
+                  left: DefaultStyles.editorPadding,
+                  right: DefaultStyles.editorPadding),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -295,14 +295,14 @@ class _CodeFieldState extends State<CodeField> {
     final lineNumberColor =
         widget.gutterStyle.textStyle?.color ?? textStyle.color?.withOpacity(.5);
 
-    final lineNumberTextStyle =
-        (widget.gutterStyle.textStyle ?? textStyle).copyWith(
-      color: lineNumberColor,
-      fontFamily: textStyle.fontFamily,
-      fontSize: lineNumberSize,
-    );
+    final lineNumberTextStyle = (widget.gutterStyle.textStyle ?? textStyle)
+        .copyWith(
+            color: lineNumberColor,
+            fontFamily: textStyle.fontFamily,
+            fontSize: lineNumberSize);
 
     final gutterStyle = widget.gutterStyle.copyWith(
+      margin: 16,
       textStyle: lineNumberTextStyle,
       errorPopupTextStyle: widget.gutterStyle.errorPopupTextStyle ??
           CodeTheme.of(context)?.styles['root'] ??
@@ -318,6 +318,4 @@ class _CodeFieldState extends State<CodeField> {
       style: gutterStyle,
     );
   }
-
-
 }
