@@ -7,4 +7,6 @@ class DefaultStyles {
   static final textColor = Colors.grey.shade200;
   static const errorPopupTextSize = 14.0;
   static const fontStyle = FontStyle.normal;
+  static const lineHeight = 1.35;
+  static const editorPadding = 20.0;
 }
