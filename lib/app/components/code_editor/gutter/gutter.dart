@@ -56,7 +56,7 @@ class GutterWidget extends StatelessWidget {
       width: style.showLineNumbers ? gutterWidth : null,
       child: Table(
         columnWidths: {
-          _lineNumberColumn: const FlexColumnWidth(),
+          _lineNumberColumn: const IntrinsicColumnWidth(),
           _issueColumn: FixedColumnWidth(issueColumnWidth),
           _foldingColumn: FixedColumnWidth(foldingColumnWidth),
         },
