@@ -4,8 +4,8 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import '../app_controller.dart';
 import '../widget_to_image_controller.dart';
 
-class ExportAndResetButtom extends StatelessWidget {
-  const ExportAndResetButtom({
+class ExportAndResetButton extends StatelessWidget {
+  const ExportAndResetButton({
     super.key,
   });
 
