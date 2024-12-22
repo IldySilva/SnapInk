@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:print_script/app/app_controller.dart';
 import 'package:print_script/app/components/app_description.dart';
+import 'package:print_script/app/components/colors_list.dart';
+import 'package:print_script/app/components/theme.dart';
 import 'package:print_script/app/components/window_controls.dart';
-import 'package:print_script/app/enums/language/enum_languages.dart';
-import 'package:print_script/app/enums/editor_themes.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import '../consts/const_default_gradients.dart';
-import '../enums/fonts.dart';
-import 'dart:ui' as ui;
-
 import 'custom_shade_slider.dart';
 import 'export_and_reset_button.dart';
+import 'gradiant_background.dart';
+import 'letter_font.dart';
 import 'lines_of_number.dart';
+import 'programming_languanges.dart';
 
 class AppToolBar extends StatefulWidget {
   AppToolBar({super.key});
@@ -67,186 +67,17 @@ class _AppToolBarState extends State<AppToolBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppDescription(),
-              Flex(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                direction: Axis.horizontal,
-                children: [
-                  Text("Background"),
-                  ValueListenableBuilder(
-                    builder: (context, value, _) {
-                      return Flexible(
-                        child: ShadSelect<GradientPalette>(
-                          initialValue: value,
-                          onChanged: (GradientPalette? newValue) {
-                            _controller.setColor(newValue!);
-                          },
-                          selectedOptionBuilder: (context, value) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  value.cleanName,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Container(decoration: BoxDecoration(shape: BoxShape.circle, gradient: LinearGradient(colors: value.gradient)), height: 16, width: 50),
-                              ],
-                            );
-                          },
-                          options: GradientPalette.values.map((e) => ShadOption(
-                                value: e,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      e.cleanName,
-                                      style: const TextStyle(color: Colors.white),
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Container(decoration: BoxDecoration(shape: BoxShape.circle, gradient: LinearGradient(colors: e.gradient)), height: 16, width: 16),
-                                  ],
-                                ),
-                              )),
-                        ),
-                      );
-                    },
-                    valueListenable: Controller.backgroundColor,
-                  ),
-                ],
+              GradiantBackground(
+                onChanged: (GradientPalette? newValue) => _controller.setColor(newValue!),
               ),
-              const SizedBox(
-                height: 6,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  for (GradientPalette gradient in GradientPalette.values.getRange(0, 8))
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, bottom: 8, right: 8),
-                      child: InkWell(
-                        onTap: () {
-                          _controller.setColor(gradient);
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: Container(decoration: BoxDecoration(gradient: LinearGradient(colors: gradient.gradient)), height: 18, width: 18),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Flex(
-                direction: Axis.horizontal,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Theme"),
-                  ValueListenableBuilder(
-                    builder: (context, value, _) {
-                      return Flexible(
-                          child: ShadSelect<ThemeType>(
-                        initialValue: value,
-                        onChanged: (ThemeType? newValue) {
-                          Controller().setTheme(newValue!);
-                        },
-                        selectedOptionBuilder: (context, value) {
-                          return Text(
-                            value.cleanName,
-                            style: const TextStyle(color: Colors.white),
-                          );
-                        },
-                        options: ThemeType.values.map((e) => ShadOption(
-                              value: e,
-                              child: Text(
-                                e.cleanName,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )),
-                      ));
-                    },
-                    valueListenable: Controller.selectedTheme,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Flex(
-                direction: Axis.horizontal,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Language"),
-                  ValueListenableBuilder(
-                    builder: (context, value, _) {
-                      return Flexible(
-                          child: ShadSelect<LanguageTypes>(
-                        initialValue: value,
-                        onChanged: (LanguageTypes? newValue) {
-                          Controller.selectedLanguage.value = newValue!;
-                          Controller.selectedTheme.notifyListeners();
-                        },
-                        selectedOptionBuilder: (context, value) {
-                          return Text(
-                            value.cleanName,
-                            style: const TextStyle(color: Colors.white),
-                          );
-                        },
-                        options: LanguageTypes.values.map((e) => ShadOption(
-                              value: e,
-                              child: Text(
-                                e.cleanName,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )),
-                      ));
-                    },
-                    valueListenable: Controller.selectedLanguage,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Flex(
-                direction: Axis.horizontal,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Font"),
-                  ValueListenableBuilder(
-                    builder: (context, value, _) {
-                      return Flexible(
-                          child: ShadSelect<EditorFont>(
-                        initialValue: value,
-                        onChanged: (EditorFont? newValue) {
-                          Controller().setFont = newValue!;
-                        },
-                        selectedOptionBuilder: (context, value) {
-                          return Text(
-                            value.cleanName,
-                            style: const TextStyle(color: Colors.white),
-                          );
-                        },
-                        options: EditorFont.values.map((e) => ShadOption(
-                              value: e,
-                              child: Text(
-                                e.cleanName,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )),
-                      ));
-                    },
-                    valueListenable: Controller.selectedFont,
-                  ),
-                ],
-              ),
+              const SizedBox(height: 6),
+              ColorsList(controller: _controller),
+              const SizedBox(height: 8),
+              CustomTheme(),
+              const SizedBox(height: 8),
+              ProgrammingLanguages(),
+              const SizedBox(height: 8),
+              LetterFont(),
               LineOfNumbers(onChanged: (v) => _controller.setShowLines(v)),
               WindowControls(onChanged: (v) => _controller.setShowWindowHeader = v),
               CustomShadSlider(
