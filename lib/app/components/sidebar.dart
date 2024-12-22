@@ -50,6 +50,14 @@ class _AppToolBarState extends State<AppToolBar> {
   }
 
   @override
+  void dispose() {
+    _shadSliderPaddingController.dispose();
+    _shadSliderRoundnessController.dispose();
+    _shadSliderOpacityController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
