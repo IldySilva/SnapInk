@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:print_script/app/consts/const_default_gradients.dart';
 import 'package:print_script/app/app_controller.dart';
 
-import 'package:print_script/app/components/sidebar.dart';
 import 'package:print_script/app/components/image_wrapper.dart';
 import 'package:print_script/app/enums/fonts.dart';
-import 'package:print_script/app/enums/language/enum_languages.dart';
 import 'package:print_script/app/enums/editor_themes.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 import 'code_editor/code_editor.dart';
+import 'export_and_reset_button.dart';
 
 class CodeEditor extends StatefulWidget {
   CodeEditor({super.key});
@@ -38,37 +35,25 @@ class _CodeEditorState extends State<CodeEditor> {
               builder: (context, value) {
                 return AnimatedContainer(
                   padding: EdgeInsets.all(Controller.padding.value),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: Controller.backgroundColor.value.gradient)),
+                  decoration: BoxDecoration(gradient: LinearGradient(colors: Controller.backgroundColor.value.gradient)),
                   duration: const Duration(milliseconds: 300),
                   child: Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            Controller.borderRadius.value),
+                        borderRadius: BorderRadius.circular(Controller.borderRadius.value),
                         child: ValueListenableBuilder(
                           builder: (context, theme, _) {
                             return CodeTheme(
-                                data:
-                                    CodeThemeData(styles: theme.themeValue),
+                                data: CodeThemeData(styles: theme.themeValue),
                                 child: AnimatedOpacity(
                                   opacity: Controller.opactity.value,
-                                  duration:
-                                      const Duration(milliseconds: 300),
+                                  duration: const Duration(milliseconds: 300),
                                   child: CodeField(
-                                      textStyle: Controller
-                                          .selectedFont.value
-                                          .getTextStyle(),
-                                      onChanged: (x) =>
-                                          Controller.code = x,
-                                      wrap: true,
-                                      gutterStyle: GutterStyle(
-                                          showFoldingHandles: false,
-                                          showErrors: false,
-                                          showLineNumbers:
-                                              Controller.showLines.value),
-                                      controller: Controller.codeController,
+                                    textStyle: Controller.selectedFont.value.getTextStyle(),
+                                    onChanged: (x) => Controller.code = x,
+                                    wrap: true,
+                                    gutterStyle: GutterStyle(showFoldingHandles: false, showErrors: false, showLineNumbers: Controller.showLines.value),
+                                    controller: Controller.codeController,
                                   ),
                                 ));
                           },
@@ -89,15 +74,12 @@ class _CodeEditorState extends State<CodeEditor> {
                           child: GestureDetector(
                             onPanUpdate: (details) {
                               if (containerWidth.value == null) {
-                                final box = (widget.key as GlobalKey)
-                                    .currentContext!
-                                    .findRenderObject() as RenderBox;
+                                final box = (widget.key as GlobalKey).currentContext!.findRenderObject() as RenderBox;
                                 containerWidth.value = box.size.width;
                               }
 
                               if (containerWidth.value != null) {
-                                containerWidth.value =
-                                    containerWidth.value! + details.delta.dx;
+                                containerWidth.value = containerWidth.value! + details.delta.dx;
                                 dragAreaSize.value += details.delta.dy;
                               }
                             },
@@ -106,14 +88,8 @@ class _CodeEditorState extends State<CodeEditor> {
                                 return AnimatedContainer(
                                     duration: const Duration(milliseconds: 200),
                                     decoration: BoxDecoration(
-                                      color: onHover
-                                          ? Theme.of(context)
-                                              .colorScheme
-                                              .onPrimaryContainer
-                                          : Colors.transparent,
-                                      borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10)),
+                                      color: onHover ? Theme.of(context).colorScheme.onPrimaryContainer : Colors.transparent,
+                                      borderRadius: const BorderRadius.only(topRight: Radius.circular(10), bottomLeft: Radius.circular(10)),
                                     ),
                                     width: 10,
                                     height: 400);
