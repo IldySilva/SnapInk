@@ -22,8 +22,7 @@ class Controller extends ChangeNotifier {
   static var selectedLanguage = ValueNotifier(LanguageTypes.javascript);
   static var selectedTheme = ValueNotifier(ThemeType.irBlack);
 
-  static ValueNotifier<GradientPalette> backgroundColor =
-      ValueNotifier<GradientPalette>(GradientPalette.PurpleHaze);
+  static ValueNotifier<GradientPalette> backgroundColor = ValueNotifier<GradientPalette>(GradientPalette.PurpleHaze);
   static ValueNotifier<double> padding = ValueNotifier(60);
   static ValueNotifier<double> opactity = ValueNotifier(0.8);
   static ValueNotifier<bool> showLines = ValueNotifier(true);
@@ -31,9 +30,7 @@ class Controller extends ChangeNotifier {
   static ValueNotifier<bool> exporting = ValueNotifier(false);
   static ValueNotifier<bool> showWindowheader = ValueNotifier(true);
 
-  static var codeController = CodeController(
-      text: Controller.code,
-      language: Controller.selectedLanguage.value.languageValue);
+  static var codeController = CodeController(text: Controller.code, language: Controller.selectedLanguage.value.languageValue);
 
   set setShowWindowHeader(bool value) {
     showWindowheader.value = value;
@@ -79,8 +76,20 @@ class Controller extends ChangeNotifier {
     notifyListeners();
   }
 
-  //TODO: Reset all the config values
   void reset() {
-  }
+    code = defaultCode;
+    selectedFont.value = EditorFont.sourceCodePro;
+    selectedLanguage.value = LanguageTypes.javascript;
+    selectedTheme.value = ThemeType.irBlack;
+    backgroundColor.value = GradientPalette.PurpleHaze;
+    padding.value = 60;
+    opactity.value = 0.8;
+    showLines.value = true;
+    borderRadius.value = 20;
+    exporting.value = false;
+    showWindowheader.value = true;
+    codeController.text = code;
 
+    notifyListeners();
+  }
 }
