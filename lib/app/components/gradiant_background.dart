@@ -10,7 +10,7 @@ class GradiantBackground extends StatelessWidget {
     required this.onChanged,
   });
 
-  final void Function(GradientPalette)? onChanged;
+  final  ValueChanged<GradientPalette?> onChanged;
 
   @override
   Widget build(BuildContext context) {
