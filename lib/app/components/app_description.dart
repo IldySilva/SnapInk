@@ -18,11 +18,9 @@ class AppDescription extends StatelessWidget {
           SizedBox(
             width: 8,
           ),
-          Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text('SnapInk', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)), Text("Take a beautiful snap of your code"),],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [Text('SnapInk', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)), Text("Take a beautiful snap of your code")],
           ),
         ],
       ),
