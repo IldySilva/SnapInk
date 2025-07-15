@@ -29,6 +29,9 @@ class Controller extends ChangeNotifier {
   static ValueNotifier<double> borderRadius = ValueNotifier(20);
   static ValueNotifier<bool> exporting = ValueNotifier(false);
   static ValueNotifier<bool> showWindowheader = ValueNotifier(true);
+  static ValueNotifier<bool> showWatermark = ValueNotifier(false);
+  static ValueNotifier<String> watermarkText = ValueNotifier("Made with SnapInk");
+  static ValueNotifier<double> watermarkOpacity = ValueNotifier(0.5);
 
   static var codeController = CodeController(text: Controller.code, language: Controller.selectedLanguage.value.languageValue);
 
@@ -76,6 +79,21 @@ class Controller extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setShowWatermark(bool value) {
+    showWatermark.value = value;
+    notifyListeners();
+  }
+
+  void setWatermarkText(String text) {
+    watermarkText.value = text;
+    notifyListeners();
+  }
+
+  void setWatermarkOpacity(double opacity) {
+    watermarkOpacity.value = opacity;
+    notifyListeners();
+  }
+
   void reset() {
     code = defaultCode;
     selectedFont.value = EditorFont.sourceCodePro;
@@ -88,6 +106,9 @@ class Controller extends ChangeNotifier {
     borderRadius.value = 20;
     exporting.value = false;
     showWindowheader.value = true;
+    showWatermark.value = false;
+    watermarkText.value = "Made with SnapInk";
+    watermarkOpacity.value = 0.5;
     codeController.text = code;
 
     notifyListeners();

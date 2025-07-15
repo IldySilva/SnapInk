@@ -3,6 +3,7 @@ import 'package:print_script/app/app_controller.dart';
 import 'package:print_script/app/components/app_description.dart';
 import 'package:print_script/app/components/colors_list.dart';
 import 'package:print_script/app/components/theme.dart';
+import 'package:print_script/app/components/watermark_controls.dart';
 import 'package:print_script/app/components/window_controls.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import '../consts/const_default_gradients.dart';
@@ -80,6 +81,8 @@ class _AppToolBarState extends State<AppToolBar> {
               LetterFont(),
               LineOfNumbers(onChanged: (v) => _controller.setShowLines(v)),
               WindowControls(onChanged: (v) => _controller.setShowWindowHeader = v),
+              WatermarkControls(),
+              const SizedBox(height: 8),
               CustomShadSlider(
                 min: 0,
                 max: 100,
