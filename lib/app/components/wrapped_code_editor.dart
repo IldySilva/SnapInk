@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:print_script/app/consts/const_default_gradients.dart';
 import 'package:print_script/app/app_controller.dart';
-
 import 'package:print_script/app/components/image_wrapper.dart';
 import 'package:print_script/app/enums/fonts.dart';
 import 'package:print_script/app/enums/editor_themes.dart';
-
 import 'code_editor/code_editor.dart';
 import 'export_and_reset_button.dart';
 
@@ -59,6 +57,47 @@ class _CodeEditorState extends State<CodeEditor> {
                           },
                           valueListenable: Controller.selectedTheme,
                         ),
+                      ),
+                      // Watermark - positioned outside the rounded corners
+                      ValueListenableBuilder<bool>(
+                        valueListenable: Controller.showWatermark,
+                        builder: (context, showWatermark, child) {
+                          if (!showWatermark) return const SizedBox.shrink();
+                          
+                          return Positioned(
+                            bottom: -2,
+                            right: 8,
+                            child: ValueListenableBuilder<String>(
+                              valueListenable: Controller.watermarkText,
+                              builder: (context, watermarkText, child) {
+                                return ValueListenableBuilder<double>(
+                                  valueListenable: Controller.watermarkOpacity,
+                                  builder: (context, watermarkOpacity, child) {
+                                    return AnimatedOpacity(
+                                      opacity: watermarkOpacity,
+                                      duration: const Duration(milliseconds: 300),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: Colors.black.withOpacity(0.2),
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Text(
+                                          watermarkText,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white.withOpacity(0.8),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          );
+                        },
                       ),
                       Positioned(
                         right: 1,
